@@ -18,7 +18,8 @@
 		F4EFF5C81888836D00790675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AD1888836D00790675 /* Foundation.framework */; };
 		F4EFF5C91888836D00790675 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5B11888836D00790675 /* UIKit.framework */; };
 		F4EFF5D11888836D00790675 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4EFF5CF1888836D00790675 /* InfoPlist.strings */; };
-		F4EFF5D31888836D00790675 /* Happy_DaysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EFF5D21888836D00790675 /* Happy_DaysTests.m */; };
+		F4EFF5DE1888838300790675 /* HDDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EFF5DD1888838300790675 /* HDDataController.m */; };
+		F4EFF5E01888887000790675 /* HDDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EFF5DF1888887000790675 /* HDDataControllerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +48,9 @@
 		F4EFF5C61888836D00790675 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F4EFF5CE1888836D00790675 /* Happy DaysTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Happy DaysTests-Info.plist"; sourceTree = "<group>"; };
 		F4EFF5D01888836D00790675 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F4EFF5D21888836D00790675 /* Happy_DaysTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Happy_DaysTests.m; sourceTree = "<group>"; };
+		F4EFF5DC1888838300790675 /* HDDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDataController.h; sourceTree = "<group>"; };
+		F4EFF5DD1888838300790675 /* HDDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDataController.m; sourceTree = "<group>"; };
+		F4EFF5DF1888887000790675 /* HDDataControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDataControllerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +114,8 @@
 				F4EFF5BD1888836D00790675 /* HDAppDelegate.m */,
 				F4EFF5BF1888836D00790675 /* Images.xcassets */,
 				F4EFF5B41888836D00790675 /* Supporting Files */,
+				F4EFF5DC1888838300790675 /* HDDataController.h */,
+				F4EFF5DD1888838300790675 /* HDDataController.m */,
 			);
 			path = "Happy Days";
 			sourceTree = "<group>";
@@ -129,8 +134,8 @@
 		F4EFF5CC1888836D00790675 /* Happy DaysTests */ = {
 			isa = PBXGroup;
 			children = (
-				F4EFF5D21888836D00790675 /* Happy_DaysTests.m */,
 				F4EFF5CD1888836D00790675 /* Supporting Files */,
+				F4EFF5DF1888887000790675 /* HDDataControllerTests.m */,
 			);
 			path = "Happy DaysTests";
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4EFF5DE1888838300790675 /* HDDataController.m in Sources */,
 				F4EFF5BE1888836D00790675 /* HDAppDelegate.m in Sources */,
 				F4EFF5BA1888836D00790675 /* main.m in Sources */,
 			);
@@ -249,7 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4EFF5D31888836D00790675 /* Happy_DaysTests.m in Sources */,
+				F4EFF5E01888887000790675 /* HDDataControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
