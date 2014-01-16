@@ -35,6 +35,7 @@
     NSDate *startOfToday = [calendar dateFromComponents:dateComponents];
     
     HDDataController *dataController = [[HDDataController alloc] init];
+    dataController.shouldPersistData = false;
     XCTAssertEqual([dataController moodForDate:now], HDMoodNotRecorded, @"Mood is not recorded at startup");
     
     HDMood mood = HDMoodHappy;

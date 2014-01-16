@@ -19,6 +19,7 @@
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hd_handleLowMemoryWarning:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
         self.moodsByYear = [NSMutableDictionary dictionary];
+        self.shouldPersistData = true;
     }
     return self;
 }
@@ -31,6 +32,11 @@
     NSMutableDictionary *dictionary = [self hd_dictionaryForDate:date];
     NSString *dateString = [self hd_dateStringForDate:date];
     dictionary[dateString] = @(mood);
+    
+    if (self.shouldPersistData) {
+        NSString *year = [self hd_yearStringForDate:date];
+        [self hd_persistDataForYear:year];
+    }
 }
 
 - (HDMood)moodForDate:(NSDate *)date {
@@ -43,11 +49,21 @@
     return HDMoodNotRecorded;
 }
 
+- (void)hd_persistDataForYear:(NSString*)year {
+    NSDictionary *dictionary = self.moodsByYear[year];
+    [dictionary writeToURL:[self hd_fileURLForYear:year] atomically:YES];
+}
+
 - (NSMutableDictionary*)hd_dictionaryForDate:(NSDate*)date {
     NSString *year = [self hd_yearStringForDate:date];
     NSMutableDictionary *result = self.moodsByYear[year];
     if (!result) {
-        result = [NSMutableDictionary dictionary];
+        if (self.shouldPersistData) {
+            result = [[NSDictionary dictionaryWithContentsOfURL:[self hd_fileURLForYear:year]] mutableCopy];
+        }
+        if (!result) {
+            result = [NSMutableDictionary dictionary];
+        }
         self.moodsByYear[year] = result;
     }
     return result;
@@ -71,6 +87,13 @@
         dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
     }
     return [dateFormatter stringFromDate:date];
+}
+
+- (NSURL*)hd_fileURLForYear:(NSString*)year {
+    NSString *filename = [year stringByAppendingString:@".plist"];
+    NSURL *documentDirectoryURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+    NSURL *result = [documentDirectoryURL URLByAppendingPathComponent:filename];
+    return result;
 }
 
 - (void)hd_handleLowMemoryWarning:(NSNotification*)notification {

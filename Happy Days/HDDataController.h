@@ -17,6 +17,9 @@ typedef NS_ENUM(NSUInteger, HDMood) {
 
 @interface HDDataController : NSObject
 
+/// shouldPersistData: true by default
+@property (nonatomic) bool shouldPersistData;
+
 - (void)setMood:(HDMood)mood ForDate:(NSDate*)date;
 - (HDMood)moodForDate:(NSDate*) date;
 
