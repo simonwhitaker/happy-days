@@ -10,6 +10,9 @@
 
 @interface HDNotificationController : NSObject
 
+@property (nonatomic) NSUInteger timeMinutes;
 @property (nonatomic, getter = isLocalNotificationEnabled) bool localNotificationEnabled;
+
+- (void)postponeUntilTomorrow;
 
 @end

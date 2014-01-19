@@ -26,6 +26,7 @@
     
     self.dataController = [[HDDataController alloc] init];
     self.notificationController = [[HDNotificationController alloc] init];
+    self.notificationController.timeMinutes = 60 * 21; // 9pm
     
     HDDayViewController *dayViewController = [[HDDayViewController alloc] init];
     dayViewController.dataController = self.dataController;

@@ -100,6 +100,9 @@
 
 - (void)hd_handleButtonTap:(UIButton*)button {
     [self.dataController setMood:button.tag ForDate:[NSDate date]];
+    
+    // Now that they've given feedback for today, don't post a notification until tomorrow (if it's still due today)
+    [self.notificationController postponeUntilTomorrow];
     [self hd_updateDisplay];
 }
 

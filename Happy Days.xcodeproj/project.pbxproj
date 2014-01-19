@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A68FC188C17F900D8FD0C /* HDDayViewController.m */; };
 		F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A6901188C3AE200D8FD0C /* HDNotificationController.m */; };
+		F4A3045B188C672B00AB7FF6 /* HDNotificationControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */; };
 		F4EFF5AE1888836D00790675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AD1888836D00790675 /* Foundation.framework */; };
 		F4EFF5B01888836D00790675 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AF1888836D00790675 /* CoreGraphics.framework */; };
 		F4EFF5B21888836D00790675 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5B11888836D00790675 /* UIKit.framework */; };
@@ -39,6 +40,7 @@
 		F41A68FC188C17F900D8FD0C /* HDDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDayViewController.m; sourceTree = "<group>"; };
 		F41A6900188C3AE200D8FD0C /* HDNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDNotificationController.h; sourceTree = "<group>"; };
 		F41A6901188C3AE200D8FD0C /* HDNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationController.m; sourceTree = "<group>"; };
+		F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationControllerTests.m; sourceTree = "<group>"; };
 		F4EFF5AA1888836D00790675 /* Happy Days.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Days.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4EFF5AD1888836D00790675 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4EFF5AF1888836D00790675 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,8 +146,9 @@
 		F4EFF5CC1888836D00790675 /* Happy DaysTests */ = {
 			isa = PBXGroup;
 			children = (
-				F4EFF5CD1888836D00790675 /* Supporting Files */,
 				F4EFF5DF1888887000790675 /* HDDataControllerTests.m */,
+				F4EFF5CD1888836D00790675 /* Supporting Files */,
+				F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */,
 			);
 			path = "Happy DaysTests";
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4A3045B188C672B00AB7FF6 /* HDNotificationControllerTests.m in Sources */,
 				F4EFF5E01888887000790675 /* HDDataControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
