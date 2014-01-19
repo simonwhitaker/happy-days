@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A68FC188C17F900D8FD0C /* HDDayViewController.m */; };
+		F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A6901188C3AE200D8FD0C /* HDNotificationController.m */; };
 		F4EFF5AE1888836D00790675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AD1888836D00790675 /* Foundation.framework */; };
 		F4EFF5B01888836D00790675 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AF1888836D00790675 /* CoreGraphics.framework */; };
 		F4EFF5B21888836D00790675 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5B11888836D00790675 /* UIKit.framework */; };
@@ -36,6 +37,8 @@
 /* Begin PBXFileReference section */
 		F41A68FB188C17F900D8FD0C /* HDDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDayViewController.h; sourceTree = "<group>"; };
 		F41A68FC188C17F900D8FD0C /* HDDayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDayViewController.m; sourceTree = "<group>"; };
+		F41A6900188C3AE200D8FD0C /* HDNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDNotificationController.h; sourceTree = "<group>"; };
+		F41A6901188C3AE200D8FD0C /* HDNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationController.m; sourceTree = "<group>"; };
 		F4EFF5AA1888836D00790675 /* Happy Days.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Days.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4EFF5AD1888836D00790675 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4EFF5AF1888836D00790675 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,12 +118,14 @@
 			children = (
 				F4EFF5BC1888836D00790675 /* HDAppDelegate.h */,
 				F4EFF5BD1888836D00790675 /* HDAppDelegate.m */,
-				F4EFF5BF1888836D00790675 /* Images.xcassets */,
-				F4EFF5B41888836D00790675 /* Supporting Files */,
 				F4EFF5DC1888838300790675 /* HDDataController.h */,
 				F4EFF5DD1888838300790675 /* HDDataController.m */,
 				F41A68FB188C17F900D8FD0C /* HDDayViewController.h */,
 				F41A68FC188C17F900D8FD0C /* HDDayViewController.m */,
+				F41A6900188C3AE200D8FD0C /* HDNotificationController.h */,
+				F41A6901188C3AE200D8FD0C /* HDNotificationController.m */,
+				F4EFF5BF1888836D00790675 /* Images.xcassets */,
+				F4EFF5B41888836D00790675 /* Supporting Files */,
 			);
 			path = "Happy Days";
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EFF5DE1888838300790675 /* HDDataController.m in Sources */,
+				F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */,
 				F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */,
 				F4EFF5BE1888836D00790675 /* HDAppDelegate.m in Sources */,
 				F4EFF5BA1888836D00790675 /* main.m in Sources */,

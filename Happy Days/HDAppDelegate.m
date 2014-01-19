@@ -9,9 +9,11 @@
 #import "HDAppDelegate.h"
 #import "HDDataController.h"
 #import "HDDayViewController.h"
+#import "HDNotificationController.h"
 
 @interface HDAppDelegate()
 @property (nonatomic) HDDataController *dataController;
+@property (nonatomic) HDNotificationController *notificationController;
 @end
 
 @implementation HDAppDelegate
@@ -23,9 +25,11 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     self.dataController = [[HDDataController alloc] init];
+    self.notificationController = [[HDNotificationController alloc] init];
     
     HDDayViewController *dayViewController = [[HDDayViewController alloc] init];
     dayViewController.dataController = self.dataController;
+    dayViewController.notificationController = self.notificationController;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dayViewController];
     

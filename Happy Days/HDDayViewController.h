@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "HDDataController.h"
+#import "HDNotificationController.h"
 
 @interface HDDayViewController : UIViewController
 
 @property (nonatomic) HDDataController *dataController;
+@property (nonatomic) HDNotificationController *notificationController;
 
 @end
