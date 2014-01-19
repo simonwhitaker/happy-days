@@ -7,6 +7,12 @@
 //
 
 #import "HDAppDelegate.h"
+#import "HDDataController.h"
+#import "HDDayViewController.h"
+
+@interface HDAppDelegate()
+@property (nonatomic) HDDataController *dataController;
+@end
 
 @implementation HDAppDelegate
 
@@ -15,6 +21,17 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.dataController = [[HDDataController alloc] init];
+    
+    HDDayViewController *dayViewController = [[HDDayViewController alloc] init];
+    dayViewController.dataController = self.dataController;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dayViewController];
+    
+    
+    self.window.rootViewController = navigationController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

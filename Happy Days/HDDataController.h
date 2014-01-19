@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSUInteger, HDMood) {
-    HDMoodNotRecorded,
-    HDMoodSad,
-    HDMoodIndifferent,
-    HDMoodHappy
+    HDMoodBad,
+    HDMoodAverage,
+    HDMoodGood,
+    
+    HDMoodNotRecorded = -1,
 };
 
 @interface HDDataController : NSObject

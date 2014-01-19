@@ -38,7 +38,7 @@
     dataController.shouldPersistData = false;
     XCTAssertEqual([dataController moodForDate:now], HDMoodNotRecorded, @"Mood is not recorded at startup");
     
-    HDMood mood = HDMoodHappy;
+    HDMood mood = HDMoodGood;
     [dataController setMood:mood ForDate:now];
     XCTAssertEqual([dataController moodForDate:now], mood, @"Mood is set correctly");
     XCTAssertEqual([dataController moodForDate:startOfToday], mood, @"Mood is set correctly for start of today");
