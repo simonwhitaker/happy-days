@@ -23,6 +23,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+
+    UIColor *tintColor = [UIColor colorWithRed:1.000 green:0.591 blue:0.000 alpha:1.000];
+    [UIView appearance].tintColor = tintColor;
+    [UISwitch appearance].onTintColor = tintColor;
     
     self.dataController = [[HDDataController alloc] init];
     self.notificationController = [[HDNotificationController alloc] init];
@@ -33,7 +37,6 @@
     dayViewController.notificationController = self.notificationController;
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dayViewController];
-    
     
     self.window.rootViewController = navigationController;
     

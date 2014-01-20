@@ -10,6 +10,7 @@
 		F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A68FC188C17F900D8FD0C /* HDDayViewController.m */; };
 		F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A6901188C3AE200D8FD0C /* HDNotificationController.m */; };
 		F4A3045B188C672B00AB7FF6 /* HDNotificationControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */; };
+		F4D630A7188D09D600A66D05 /* HDMoodButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D630A6188D09D600A66D05 /* HDMoodButton.m */; };
 		F4EFF5AE1888836D00790675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AD1888836D00790675 /* Foundation.framework */; };
 		F4EFF5B01888836D00790675 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AF1888836D00790675 /* CoreGraphics.framework */; };
 		F4EFF5B21888836D00790675 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5B11888836D00790675 /* UIKit.framework */; };
@@ -41,6 +42,8 @@
 		F41A6900188C3AE200D8FD0C /* HDNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDNotificationController.h; sourceTree = "<group>"; };
 		F41A6901188C3AE200D8FD0C /* HDNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationController.m; sourceTree = "<group>"; };
 		F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationControllerTests.m; sourceTree = "<group>"; };
+		F4D630A5188D09D600A66D05 /* HDMoodButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMoodButton.h; sourceTree = "<group>"; };
+		F4D630A6188D09D600A66D05 /* HDMoodButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMoodButton.m; sourceTree = "<group>"; };
 		F4EFF5AA1888836D00790675 /* Happy Days.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Days.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4EFF5AD1888836D00790675 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F4EFF5AF1888836D00790675 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -124,6 +127,8 @@
 				F4EFF5DD1888838300790675 /* HDDataController.m */,
 				F41A68FB188C17F900D8FD0C /* HDDayViewController.h */,
 				F41A68FC188C17F900D8FD0C /* HDDayViewController.m */,
+				F4D630A5188D09D600A66D05 /* HDMoodButton.h */,
+				F4D630A6188D09D600A66D05 /* HDMoodButton.m */,
 				F41A6900188C3AE200D8FD0C /* HDNotificationController.h */,
 				F41A6901188C3AE200D8FD0C /* HDNotificationController.m */,
 				F4EFF5BF1888836D00790675 /* Images.xcassets */,
@@ -260,6 +265,7 @@
 			files = (
 				F4EFF5DE1888838300790675 /* HDDataController.m in Sources */,
 				F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */,
+				F4D630A7188D09D600A66D05 /* HDMoodButton.m in Sources */,
 				F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */,
 				F4EFF5BE1888836D00790675 /* HDAppDelegate.m in Sources */,
 				F4EFF5BA1888836D00790675 /* main.m in Sources */,

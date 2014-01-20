@@ -7,6 +7,7 @@
 //
 
 #import "HDDayViewController.h"
+#import "HDMoodButton.h"
 
 @interface HDDayViewController ()
 @property (nonatomic) UIButton *goodButton;
@@ -47,27 +48,24 @@
     label.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label];
     
-    UIButton *goodButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton *goodButton = [[HDMoodButton alloc] init];
     goodButton.translatesAutoresizingMaskIntoConstraints = NO;
     goodButton.tag = HDMoodGood;
     [goodButton setTitle:@"Good" forState:UIControlStateNormal];
-    [goodButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     [goodButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goodButton];
     
-    UIButton *averageButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton *averageButton = [[HDMoodButton alloc] init];
     averageButton.translatesAutoresizingMaskIntoConstraints = NO;
     averageButton.tag = HDMoodAverage;
     [averageButton setTitle:@"Average" forState:UIControlStateNormal];
-    [averageButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     [averageButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:averageButton];
     
-    UIButton *badButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton *badButton = [[HDMoodButton alloc] init];
     badButton.translatesAutoresizingMaskIntoConstraints = NO;
     badButton.tag = HDMoodBad;
     [badButton setTitle:@"Bad" forState:UIControlStateNormal];
-    [badButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
     [badButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:badButton];
     
@@ -84,7 +82,7 @@
     
     id topGuide = self.topLayoutGuide;
     NSDictionary *views = NSDictionaryOfVariableBindings(notificationSwitch, notificationLabel, topGuide, label, goodButton, averageButton, badButton);
-    NSDictionary *metrics = @{ @"verticalSpacing": @30 };
+    NSDictionary *metrics = @{ @"verticalSpacing": @20 };
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-verticalSpacing-[label]-verticalSpacing-[goodButton]-verticalSpacing-[averageButton]-verticalSpacing-[badButton]" options:NSLayoutFormatAlignAllCenterX metrics:metrics views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-|" options:0 metrics:nil views:views]];
