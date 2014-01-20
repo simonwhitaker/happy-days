@@ -17,6 +17,17 @@
 
 @implementation HDDayViewController
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hd_updateDisplay) name:UIApplicationWillEnterForegroundNotification object:nil];
+        
+        // TODO: on significant time change we should check to see if the view is foremost; if so, show a dialog asking the user if they want to switch to the new date
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hd_updateDisplay) name:UIApplicationSignificantTimeChangeNotification object:nil];
+    }
+    return self;
+}
+
 - (void)loadView {
     UIView *rootView = [[UIView alloc] init];
     self.view = rootView;
@@ -85,14 +96,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    static NSDateFormatter *dateFormatter;
-    if (!dateFormatter) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.timeStyle = NSDateFormatterNoStyle;
-        dateFormatter.dateStyle = NSDateFormatterLongStyle;
-    }
     [super viewWillAppear:animated];
-    self.title = [dateFormatter stringFromDate:[NSDate date]];
     [self hd_updateDisplay];
 }
 
@@ -107,6 +111,14 @@
 }
 
 - (void)hd_updateDisplay {
+    static NSDateFormatter *dateFormatter;
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        dateFormatter.dateStyle = NSDateFormatterLongStyle;
+    }
+    self.title = [dateFormatter stringFromDate:[NSDate date]];
+
     HDMood recordedMood = [self.dataController moodForDate:[NSDate date]];
     for (UIButton *button in self.buttons) {
         button.selected = recordedMood == button.tag;
