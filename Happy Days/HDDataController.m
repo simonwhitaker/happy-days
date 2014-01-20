@@ -90,9 +90,22 @@
 }
 
 - (NSURL*)hd_fileURLForYear:(NSString*)year {
+    NSFileManager *fm = [NSFileManager defaultManager];
+
     NSString *filename = [year stringByAppendingString:@".plist"];
-    NSURL *documentDirectoryURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
-    NSURL *result = [documentDirectoryURL URLByAppendingPathComponent:filename];
+    NSURL *documentDirectoryURL = [[fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+    NSURL *dataDirectoryURL = [documentDirectoryURL URLByAppendingPathComponent:@"data" isDirectory:YES];
+    
+    if (![fm fileExistsAtPath:[dataDirectoryURL path]]) {
+        NSError *error;
+        BOOL success = [fm createDirectoryAtPath:[dataDirectoryURL path] withIntermediateDirectories:YES attributes:nil error:&error];
+        if (!success) {
+            NSLog(@"Error creating data directory: %@", error);
+            abort();
+        }
+    }
+    
+    NSURL *result = [dataDirectoryURL URLByAppendingPathComponent:filename];
     return result;
 }
 
