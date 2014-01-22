@@ -8,7 +8,7 @@
 
 #import "HDMoodButton.h"
 
-const CGSize kSize = { 120, 70 };
+const CGSize kSize = { 150, 70 };
 
 @implementation HDMoodButton
 
@@ -17,9 +17,8 @@ const CGSize kSize = { 120, 70 };
     if (self) {
         [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kSize.height]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kSize.width]];
-        self.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-        [self setTitleColor:[UIColor colorWithWhite:0.1 alpha:1.0] forState:UIControlStateNormal];
-        self.layer.cornerRadius = MIN(kSize.width, kSize.height) / 2;
+        self.layer.cornerRadius = 8;
+        [self hd_updateAppearance];
     }
     return self;
 }
@@ -30,7 +29,8 @@ const CGSize kSize = { 120, 70 };
 }
 
 - (void)hd_updateAppearance {
-    self.backgroundColor = self.selected ? self.tintColor : [UIColor colorWithWhite:0.9 alpha:1.0];
+    self.backgroundColor = self.selected ? self.tintColor : [UIColor colorWithWhite:0.6 alpha:1.0];
+    [self setTitleColor:[UIColor colorWithWhite:1 alpha:1.0] forState:UIControlStateNormal];
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
