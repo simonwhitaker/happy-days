@@ -24,6 +24,7 @@
 		F4EFF5D11888836D00790675 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4EFF5CF1888836D00790675 /* InfoPlist.strings */; };
 		F4EFF5DE1888838300790675 /* HDDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EFF5DD1888838300790675 /* HDDataController.m */; };
 		F4EFF5E01888887000790675 /* HDDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EFF5DF1888887000790675 /* HDDataControllerTests.m */; };
+		F4F09DC3188F7AC000140D12 /* HDYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F09DC2188F7AC000140D12 /* HDYearViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		F4EFF5DC1888838300790675 /* HDDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDataController.h; sourceTree = "<group>"; };
 		F4EFF5DD1888838300790675 /* HDDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDataController.m; sourceTree = "<group>"; };
 		F4EFF5DF1888887000790675 /* HDDataControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDataControllerTests.m; sourceTree = "<group>"; };
+		F4F09DC1188F7AC000140D12 /* HDYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDYearViewController.h; sourceTree = "<group>"; };
+		F4F09DC2188F7AC000140D12 /* HDYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDYearViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +130,8 @@
 				F4EFF5DD1888838300790675 /* HDDataController.m */,
 				F41A68FB188C17F900D8FD0C /* HDDayViewController.h */,
 				F41A68FC188C17F900D8FD0C /* HDDayViewController.m */,
+				F4F09DC1188F7AC000140D12 /* HDYearViewController.h */,
+				F4F09DC2188F7AC000140D12 /* HDYearViewController.m */,
 				F4D630A5188D09D600A66D05 /* HDMoodButton.h */,
 				F4D630A6188D09D600A66D05 /* HDMoodButton.m */,
 				F41A6900188C3AE200D8FD0C /* HDNotificationController.h */,
@@ -215,6 +220,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Netcetera;
 				TargetAttributes = {
+					F4EFF5A91888836D00790675 = {
+						DevelopmentTeam = VW9QM42U4U;
+					};
 					F4EFF5C41888836D00790675 = {
 						TestTargetID = F4EFF5A91888836D00790675;
 					};
@@ -264,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EFF5DE1888838300790675 /* HDDataController.m in Sources */,
+				F4F09DC3188F7AC000140D12 /* HDYearViewController.m in Sources */,
 				F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */,
 				F4D630A7188D09D600A66D05 /* HDMoodButton.m in Sources */,
 				F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */,
@@ -388,10 +397,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happy Days/Happy Days-Prefix.pch";
 				INFOPLIST_FILE = "Happy Days/Happy Days-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -401,10 +413,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happy Days/Happy Days-Prefix.pch";
 				INFOPLIST_FILE = "Happy Days/Happy Days-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
