@@ -25,6 +25,8 @@
 		F4EFF5DE1888838300790675 /* HDDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EFF5DD1888838300790675 /* HDDataController.m */; };
 		F4EFF5E01888887000790675 /* HDDataControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EFF5DF1888887000790675 /* HDDataControllerTests.m */; };
 		F4F09DC3188F7AC000140D12 /* HDYearViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F09DC2188F7AC000140D12 /* HDYearViewController.m */; };
+		F4F09DC6188F7D8900140D12 /* HDCalendarDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F09DC5188F7D8900140D12 /* HDCalendarDayCell.m */; };
+		F4F09DC9188F875500140D12 /* NSDate+HDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F09DC8188F875500140D12 /* NSDate+HDAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,10 @@
 		F4EFF5DF1888887000790675 /* HDDataControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDataControllerTests.m; sourceTree = "<group>"; };
 		F4F09DC1188F7AC000140D12 /* HDYearViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDYearViewController.h; sourceTree = "<group>"; };
 		F4F09DC2188F7AC000140D12 /* HDYearViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDYearViewController.m; sourceTree = "<group>"; };
+		F4F09DC4188F7D8900140D12 /* HDCalendarDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDCalendarDayCell.h; sourceTree = "<group>"; };
+		F4F09DC5188F7D8900140D12 /* HDCalendarDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDCalendarDayCell.m; sourceTree = "<group>"; };
+		F4F09DC7188F875500140D12 /* NSDate+HDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+HDAdditions.h"; sourceTree = "<group>"; };
+		F4F09DC8188F875500140D12 /* NSDate+HDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HDAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,12 +138,16 @@
 				F41A68FC188C17F900D8FD0C /* HDDayViewController.m */,
 				F4F09DC1188F7AC000140D12 /* HDYearViewController.h */,
 				F4F09DC2188F7AC000140D12 /* HDYearViewController.m */,
+				F4F09DC4188F7D8900140D12 /* HDCalendarDayCell.h */,
+				F4F09DC5188F7D8900140D12 /* HDCalendarDayCell.m */,
 				F4D630A5188D09D600A66D05 /* HDMoodButton.h */,
 				F4D630A6188D09D600A66D05 /* HDMoodButton.m */,
 				F41A6900188C3AE200D8FD0C /* HDNotificationController.h */,
 				F41A6901188C3AE200D8FD0C /* HDNotificationController.m */,
 				F4EFF5BF1888836D00790675 /* Images.xcassets */,
 				F4EFF5B41888836D00790675 /* Supporting Files */,
+				F4F09DC7188F875500140D12 /* NSDate+HDAdditions.h */,
+				F4F09DC8188F875500140D12 /* NSDate+HDAdditions.m */,
 			);
 			path = "Happy Days";
 			sourceTree = "<group>";
@@ -273,9 +283,11 @@
 			files = (
 				F4EFF5DE1888838300790675 /* HDDataController.m in Sources */,
 				F4F09DC3188F7AC000140D12 /* HDYearViewController.m in Sources */,
+				F4F09DC9188F875500140D12 /* NSDate+HDAdditions.m in Sources */,
 				F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */,
 				F4D630A7188D09D600A66D05 /* HDMoodButton.m in Sources */,
 				F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */,
+				F4F09DC6188F7D8900140D12 /* HDCalendarDayCell.m in Sources */,
 				F4EFF5BE1888836D00790675 /* HDAppDelegate.m in Sources */,
 				F4EFF5BA1888836D00790675 /* main.m in Sources */,
 			);

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HDDataController.h"
 
 @interface HDYearViewController : UICollectionViewController
+
+@property (nonatomic) NSInteger year;
+@property (nonatomic) HDDataController *dataController;
 
 @end

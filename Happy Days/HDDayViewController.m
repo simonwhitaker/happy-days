@@ -132,6 +132,12 @@
 
 - (void)hd_handleYearButton:(id)sender {
     HDYearViewController *yearVC = [[HDYearViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *dateComps = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
+    yearVC.year = dateComps.year;
+    yearVC.dataController = self.dataController;
+    
     [self.navigationController pushViewController:yearVC animated:YES];
 }
 
