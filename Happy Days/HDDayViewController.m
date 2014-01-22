@@ -7,6 +7,7 @@
 //
 
 #import "HDDayViewController.h"
+#import "HDYearViewController.h"
 #import "HDMoodButton.h"
 
 @interface HDDayViewController ()
@@ -37,10 +38,46 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self hd_setupSubviews];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Year" style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self hd_updateDisplay];
+}
+
+#pragma mark - Private methods
+
+- (void)hd_handleButtonTap:(UIButton*)button {
+    [self.dataController setMood:button.tag ForDate:[NSDate date]];
+    
+    // Now that they've given feedback for today, don't post a notification until tomorrow (if it's still due today)
+    [self.notificationController postponeUntilTomorrow];
+    [self hd_updateDisplay];
+}
+
+- (void)hd_updateDisplay {
+    static NSDateFormatter *dateFormatter;
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+        dateFormatter.dateStyle = NSDateFormatterLongStyle;
+    }
+    self.title = [dateFormatter stringFromDate:[NSDate date]];
+
+    HDMood recordedMood = [self.dataController moodForDate:[NSDate date]];
+    for (UIButton *button in self.buttons) {
+        button.selected = recordedMood == button.tag;
+    }
+}
+
+- (void)hd_handleNotificationSwitchValueChanged:(UISwitch*)notificationSwitch {
+    self.notificationController.localNotificationEnabled = notificationSwitch.isOn;
 }
 
 - (void)hd_setupSubviews {
-
+    
     UILabel *label = [[UILabel alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
     label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
@@ -86,45 +123,16 @@
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-verticalSpacing-[label]-verticalSpacing-[goodButton]-verticalSpacing-[averageButton]-verticalSpacing-[badButton]" options:NSLayoutFormatAlignAllCenterX metrics:metrics views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-|" options:0 metrics:nil views:views]];
-
+    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[badButton]-(>=0)-[notificationSwitch]-|" options:0 metrics:metrics views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[notificationSwitch]-[notificationLabel]" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     
     self.buttons = @[ goodButton, averageButton, badButton ];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self hd_updateDisplay];
-}
-
-#pragma mark - Private methods
-
-- (void)hd_handleButtonTap:(UIButton*)button {
-    [self.dataController setMood:button.tag ForDate:[NSDate date]];
-    
-    // Now that they've given feedback for today, don't post a notification until tomorrow (if it's still due today)
-    [self.notificationController postponeUntilTomorrow];
-    [self hd_updateDisplay];
-}
-
-- (void)hd_updateDisplay {
-    static NSDateFormatter *dateFormatter;
-    if (!dateFormatter) {
-        dateFormatter = [[NSDateFormatter alloc] init];
-        dateFormatter.timeStyle = NSDateFormatterNoStyle;
-        dateFormatter.dateStyle = NSDateFormatterLongStyle;
-    }
-    self.title = [dateFormatter stringFromDate:[NSDate date]];
-
-    HDMood recordedMood = [self.dataController moodForDate:[NSDate date]];
-    for (UIButton *button in self.buttons) {
-        button.selected = recordedMood == button.tag;
-    }
-}
-
-- (void)hd_handleNotificationSwitchValueChanged:(UISwitch*)notificationSwitch {
-    self.notificationController.localNotificationEnabled = notificationSwitch.isOn;
+- (void)hd_handleYearButton:(id)sender {
+    HDYearViewController *yearVC = [[HDYearViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+    [self.navigationController pushViewController:yearVC animated:YES];
 }
 
 @end
