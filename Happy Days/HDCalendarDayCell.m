@@ -17,7 +17,6 @@
         // Initialization code
         UILabel *dayNumberLabel = [[UILabel alloc] init];
         dayNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        dayNumberLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
         dayNumberLabel.minimumScaleFactor = 0.1;
         dayNumberLabel.textAlignment = NSTextAlignmentCenter;
         dayNumberLabel.layer.cornerRadius = 20;
