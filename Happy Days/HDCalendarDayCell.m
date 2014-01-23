@@ -19,7 +19,6 @@
         dayNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
         dayNumberLabel.minimumScaleFactor = 0.1;
         dayNumberLabel.textAlignment = NSTextAlignmentCenter;
-        dayNumberLabel.layer.cornerRadius = 20;
         [self addSubview:dayNumberLabel];
         self.dayNumberLabel = dayNumberLabel;
         
