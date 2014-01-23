@@ -17,7 +17,6 @@
         // Initialization code
         UILabel *dayNumberLabel = [[UILabel alloc] init];
         dayNumberLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        dayNumberLabel.minimumScaleFactor = 0.1;
         dayNumberLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:dayNumberLabel];
         self.dayNumberLabel = dayNumberLabel;
