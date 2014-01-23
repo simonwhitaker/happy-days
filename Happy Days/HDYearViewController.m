@@ -65,8 +65,6 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
         dateComps.day = indexPath.item + 1;
         NSDate *date = [self.calendar dateFromComponents:dateComps];
         
-        dateComps = [self.calendar components:NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
-        
         HDMood mood = [self.dataController moodForDate:date];
         if (mood != HDMoodNotRecorded) {
             UIColor *backgroundColor = self.collectionView.backgroundColor;
