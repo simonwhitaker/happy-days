@@ -22,7 +22,7 @@
         self.dayNumberLabel = dayNumberLabel;
         
         NSDictionary *views = NSDictionaryOfVariableBindings(dayNumberLabel);
-        NSDictionary *metrics = @{ @"padding": @2 };
+        NSDictionary *metrics = @{ @"padding": @0 };
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-padding-[dayNumberLabel]-padding-|" options:0 metrics:metrics views:views]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-padding-[dayNumberLabel]-padding-|" options:0 metrics:metrics views:views]];
     }

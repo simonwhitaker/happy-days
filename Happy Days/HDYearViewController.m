@@ -58,11 +58,13 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
     HDCalendarDayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarDayViewIdentifier forIndexPath:indexPath];
     cell.backgroundColor = self.collectionView.backgroundColor;
     
-    if (indexPath.item) {
+    NSInteger day = indexPath.item - [self numberOfSpacerCellsForSection:indexPath.section] + 1;
+    
+    if (day > 0) {
         NSDateComponents *dateComps = [[NSDateComponents alloc] init];
         dateComps.year = self.year;
         dateComps.month = indexPath.section + 1;
-        dateComps.day = indexPath.item + 1;
+        dateComps.day = day;
         NSDate *date = [self.calendar dateFromComponents:dateComps];
         
         HDMood mood = [self.dataController moodForDate:date];
@@ -84,7 +86,7 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
             cell.dayNumberLabel.backgroundColor = backgroundColor;
         }
 
-        cell.dayNumberLabel.text = [NSString stringWithFormat:@"%li", (long)(indexPath.item)];
+        cell.dayNumberLabel.text = [NSString stringWithFormat:@"%li", (long)day];
         cell.dayNumberLabel.font = [date hd_isToday] ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:16] : [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
     }
     return cell;
@@ -129,35 +131,39 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
     NSDate *date = [self.calendar dateFromComponents:dateComps];
 
     NSRange range = [self.calendar rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:date];
-    return range.length + 1;
+    return range.length + [self numberOfSpacerCellsForSection:section];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item == 0) {
-        // item 0 is a spacer just to get the rest of the year aligned on start-of-week boundaries
-        NSDateComponents *dateComps = [[NSDateComponents alloc] init];
-        dateComps.year = self.year;
-        dateComps.day = 1;
-        dateComps.month = indexPath.section + 1;
-        NSDate *date = [self.calendar dateFromComponents:dateComps];
-        dateComps = [self.calendar components:NSCalendarUnitWeekday fromDate:date];
-        
-        NSInteger requiredSpaceInDays = (dateComps.weekday + 5) % 7; // Monday is 0, Monday is 1, etc.
-        CGFloat width = 0;
-        if (requiredSpaceInDays) {
-            width = 44.0 * requiredSpaceInDays + 2.0 * (requiredSpaceInDays - 1);
-        }
-        return CGSizeMake(width, 44.0);
-    }
-    return CGSizeMake(44.0, 44.0);
+    CGFloat width = [self cellWidthForColumn:indexPath.item % 7];
+    return CGSizeMake(width, 44.0);
+}
+
+- (NSInteger)numberOfSpacerCellsForSection:(NSInteger)section {
+    NSDateComponents *dateComps = [[NSDateComponents alloc] init];
+    dateComps.year = self.year;
+    dateComps.day = 1;
+    dateComps.month = section + 1;
+    
+    NSDate *date = [self.calendar dateFromComponents:dateComps];
+    dateComps = [self.calendar components:NSCalendarUnitWeekday fromDate:date];
+    NSInteger weekday = dateComps.weekday;
+    
+    static NSInteger startOfWeekDay = 2; // Monday in Gregorian calendar
+    // If weekday == startOfWeekDay we want 0 spacers. If weekday == startOfWeekDay + 1 we want 1 spacer, etc
+    return (weekday + 7 - startOfWeekDay) % 7;
+}
+
+- (CGFloat)cellWidthForColumn:(NSInteger)columnIndex {
+    return (columnIndex == 0 || columnIndex == 6) ? 45.0 : 46.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
+    return 0.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 2.0;
+    return 0.0;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
