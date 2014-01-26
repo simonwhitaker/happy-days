@@ -72,13 +72,13 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
             UIColor *backgroundColor = self.collectionView.backgroundColor;
             switch (mood) {
                 case HDMoodGood:
-                    backgroundColor = [UIColor greenColor];
+                    backgroundColor = [UIColor colorWithRed:0.780 green:0.941 blue:0.620 alpha:1.000];
                     break;
                 case HDMoodAverage:
-                    backgroundColor = [UIColor orangeColor];
+                    backgroundColor = [UIColor colorWithRed:1.000 green:0.965 blue:0.678 alpha:1.000];
                     break;
                 case HDMoodBad:
-                    backgroundColor = [UIColor redColor];
+                    backgroundColor = [UIColor colorWithRed:0.980 green:0.647 blue:0.616 alpha:1.000];
                     break;
                 default:
                     break;
