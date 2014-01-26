@@ -155,15 +155,16 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
 }
 
 - (CGFloat)cellWidthForColumn:(NSInteger)columnIndex {
+    return 44.0;
     return (columnIndex == 0 || columnIndex == 6) ? 45.0 : 46.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
+    return 1.0;
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.0;
+    return 2.0;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
