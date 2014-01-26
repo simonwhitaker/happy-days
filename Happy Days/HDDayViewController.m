@@ -88,6 +88,7 @@
     UIButton *goodButton = [[HDMoodButton alloc] init];
     goodButton.translatesAutoresizingMaskIntoConstraints = NO;
     goodButton.tag = HDMoodGood;
+    goodButton.backgroundColor = [UIColor colorWithRed:0.780 green:0.941 blue:0.620 alpha:1.000];
     [goodButton setTitle:@"Good" forState:UIControlStateNormal];
     [goodButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goodButton];
@@ -95,6 +96,7 @@
     UIButton *averageButton = [[HDMoodButton alloc] init];
     averageButton.translatesAutoresizingMaskIntoConstraints = NO;
     averageButton.tag = HDMoodAverage;
+    averageButton.backgroundColor = [UIColor colorWithRed:1.000 green:0.965 blue:0.678 alpha:1.000];
     [averageButton setTitle:@"Average" forState:UIControlStateNormal];
     [averageButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:averageButton];
@@ -102,6 +104,7 @@
     UIButton *badButton = [[HDMoodButton alloc] init];
     badButton.translatesAutoresizingMaskIntoConstraints = NO;
     badButton.tag = HDMoodBad;
+    badButton.backgroundColor = [UIColor colorWithRed:0.980 green:0.647 blue:0.616 alpha:1.000];
     [badButton setTitle:@"Bad" forState:UIControlStateNormal];
     [badButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:badButton];
