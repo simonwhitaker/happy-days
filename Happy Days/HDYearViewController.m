@@ -48,9 +48,13 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
     [super viewWillAppear:animated];
     
     if (self.isMovingToParentViewController) {
-        NSUInteger dayInYear = [self.calendar ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitYear forDate:[NSDate date]];
-        
-        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:dayInYear inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+        NSDateComponents *dateComps = [self.calendar components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear fromDate:[NSDate date]];
+        if (dateComps.year == self.year) {
+            NSInteger section = dateComps.month - 1;
+            NSInteger item = dateComps.day - 1 + [self numberOfSpacerCellsForSection:section];
+            NSIndexPath *todayIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
+            [self.collectionView scrollToItemAtIndexPath:todayIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+        }
     }
 }
 
