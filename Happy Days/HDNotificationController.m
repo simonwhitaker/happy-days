@@ -104,9 +104,9 @@ static NSString *const kUserDefaultsKeyLocalNotificationsTimeMinutes = @"org.net
 
 - (void)hd_debugPrintAllScheduledLocalNotifications {
     NSArray *scheduledLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    NSLog(@"%lu local notification(s) scheduled", [scheduledLocalNotifications count]);
+    NSLog(@"%lu local notification(s) scheduled", (unsigned long)[scheduledLocalNotifications count]);
     [scheduledLocalNotifications enumerateObjectsUsingBlock:^(UILocalNotification *localNotification, NSUInteger idx, BOOL *stop) {
-        NSLog(@"%lu: %@, fires at %@, repeat interval = %lu", idx + 1, localNotification.alertBody, localNotification.fireDate, localNotification.repeatInterval);
+        NSLog(@"%lu: %@, fires at %@, repeat interval = %lu", (unsigned long)(idx + 1), localNotification.alertBody, localNotification.fireDate, (unsigned long)(localNotification.repeatInterval));
     }];
 }
 

@@ -97,7 +97,7 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
         else if (indexPath.row == HDSettingsReminderRowTime) {
             cell.textLabel.text = @"Reminder time";
             cell.accessoryView = nil;
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu:%02lu", self.notificationController.timeMinutes / 60, self.notificationController.timeMinutes % 60];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu:%02lu", (unsigned long)(self.notificationController.timeMinutes / 60), (unsigned long)(self.notificationController.timeMinutes % 60)];
         }
         else if (indexPath.row == HDSettingsReminderRowTimePicker) {
             HDDatePickerCell *datePickerCell = (HDDatePickerCell*)cell;
