@@ -45,8 +45,9 @@
     [super viewDidLoad];
     [self hd_setupSubviews];
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleSettingsButton:)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Year" style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
+//    [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"740-gear"] style:<#(UIBarButtonItemStyle)#> target:<#(id)#> action:<#(SEL)#>]
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"740-gear"] style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleSettingsButton:)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"851-calendar"] style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
