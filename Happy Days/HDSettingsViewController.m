@@ -7,8 +7,11 @@
 //
 
 #import "HDSettingsViewController.h"
+#import "HDDatePickerCell.h"
+#import "HDNotificationController+TimeAsDate.h"
 
-static NSString *const kStandardCellId = @"CellId";
+static NSString *const kStandardCellId = @"StandardCellId";
+static NSString *const kTimePickerCellId = @"TimePickerCellId";
 
 typedef NS_ENUM(NSInteger, HDSettingsSection) {
     HDSettingsSectionReminder,
@@ -19,12 +22,14 @@ typedef NS_ENUM(NSInteger, HDSettingsSection) {
 typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
     HDSettingsReminderRowOnSwitch,
     HDSettingsReminderRowTime,
+    HDSettingsReminderRowTimePicker,
     
     HDSettingsReminderRowsCount
 };
 
 @interface HDSettingsViewController ()
 @property (nonatomic, weak) UISwitch *reminderSwitch;
+@property (nonatomic) bool showTimePicker;
 @end
 
 @implementation HDSettingsViewController
@@ -32,7 +37,7 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
 - (id)init {
     self = [super initWithStyle:UITableViewStyleGrouped];
     if (self) {
-
+        [self.tableView registerClass:[HDDatePickerCell class] forCellReuseIdentifier:kTimePickerCellId];
     }
     return self;
 }
@@ -52,15 +57,30 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == HDSettingsSectionReminder) {
-        return self.notificationController.isLocalNotificationEnabled ? HDSettingsReminderRowsCount : HDSettingsReminderRowsCount - 1;
+        if (self.notificationController.isLocalNotificationEnabled && self.showTimePicker) {
+            return 3;
+        }
+        else if (self.notificationController.isLocalNotificationEnabled) {
+            return 2;
+        }
+        else {
+            return 1;
+        }
     }
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kStandardCellId];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kStandardCellId];
+    UITableViewCell *cell;
+    
+    if (indexPath.section == HDSettingsSectionReminder && indexPath.row == HDSettingsReminderRowTimePicker) {
+        cell = [tableView dequeueReusableCellWithIdentifier:kTimePickerCellId forIndexPath:indexPath];
+    }
+    else {
+        cell = [tableView dequeueReusableCellWithIdentifier:kStandardCellId];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kStandardCellId];
+        }
     }
 
     if (indexPath.section == HDSettingsSectionReminder) {
@@ -79,6 +99,13 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
             cell.accessoryView = nil;
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu:%02lu", self.notificationController.timeMinutes / 60, self.notificationController.timeMinutes % 60];
         }
+        else if (indexPath.row == HDSettingsReminderRowTimePicker) {
+            HDDatePickerCell *datePickerCell = (HDDatePickerCell*)cell;
+            datePickerCell.datePicker.datePickerMode = UIDatePickerModeTime;
+            datePickerCell.datePicker.minuteInterval = 5;
+            [datePickerCell.datePicker setDate:self.notificationController.notificationTimeAsDate animated:NO];
+            [datePickerCell.datePicker addTarget:self action:@selector(hd_handleDatePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+        }
     }
     
     return cell;
@@ -95,6 +122,13 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
 
 #pragma mark - UITableViewDelegate methods
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == HDSettingsSectionReminder && indexPath.row == HDSettingsReminderRowTimePicker) {
+        return 215.0;
+    }
+    return tableView.rowHeight;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == HDSettingsSectionReminder) {
         if (indexPath.row == HDSettingsReminderRowOnSwitch) {
@@ -102,7 +136,18 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
             [self.reminderSwitch setOn:self.notificationController.isLocalNotificationEnabled animated:YES];
             [self hd_reloadReminderSection];
         }
+        else if (indexPath.row == HDSettingsReminderRowTime) {
+            self.showTimePicker = !self.showTimePicker;
+            NSIndexPath *ip = [NSIndexPath indexPathForRow:HDSettingsReminderRowTimePicker inSection:HDSettingsSectionReminder];
+            if (self.showTimePicker) {
+                [tableView insertRowsAtIndexPaths:@[ip] withRowAnimation:UITableViewRowAnimationTop];
+            }
+            else {
+                [tableView deleteRowsAtIndexPaths:@[ip] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)hd_handleDoneButton:(id)sender {
@@ -116,6 +161,11 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
 
 - (void)hd_reloadReminderSection {
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:HDSettingsSectionReminder] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)hd_handleDatePickerValueChanged:(UIDatePicker*)datePicker {
+    self.notificationController.notificationTimeAsDate = datePicker.date;
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:HDSettingsReminderRowTime inSection:HDSettingsSectionReminder]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end

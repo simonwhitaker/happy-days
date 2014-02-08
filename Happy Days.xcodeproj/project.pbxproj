@@ -11,6 +11,8 @@
 		F41A68FE188C17F900D8FD0C /* HDDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A68FC188C17F900D8FD0C /* HDDayViewController.m */; };
 		F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41A6901188C3AE200D8FD0C /* HDNotificationController.m */; };
 		F4798B6918A6B4A800D3A627 /* HDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4798B6818A6B4A800D3A627 /* HDSettingsViewController.m */; };
+		F4798B7518A6C40500D3A627 /* HDDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4798B7418A6C40500D3A627 /* HDDatePickerCell.m */; };
+		F4798B7A18A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4798B7918A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m */; };
 		F4A3045B188C672B00AB7FF6 /* HDNotificationControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */; };
 		F4D630A7188D09D600A66D05 /* HDMoodButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D630A6188D09D600A66D05 /* HDMoodButton.m */; };
 		F4EFF5AE1888836D00790675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AD1888836D00790675 /* Foundation.framework */; };
@@ -51,6 +53,10 @@
 		F4798B6718A6B4A800D3A627 /* HDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDSettingsViewController.h; sourceTree = "<group>"; };
 		F4798B6818A6B4A800D3A627 /* HDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDSettingsViewController.m; sourceTree = "<group>"; };
 		F4798B6D18A6BB8000D3A627 /* HDDismissableViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDismissableViewControllerDelegate.h; sourceTree = "<group>"; };
+		F4798B7318A6C40500D3A627 /* HDDatePickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDDatePickerCell.h; sourceTree = "<group>"; };
+		F4798B7418A6C40500D3A627 /* HDDatePickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDDatePickerCell.m; sourceTree = "<group>"; };
+		F4798B7818A6C9F200D3A627 /* HDNotificationController+TimeAsDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HDNotificationController+TimeAsDate.h"; sourceTree = "<group>"; };
+		F4798B7918A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HDNotificationController+TimeAsDate.m"; sourceTree = "<group>"; };
 		F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationControllerTests.m; sourceTree = "<group>"; };
 		F4D630A5188D09D600A66D05 /* HDMoodButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMoodButton.h; sourceTree = "<group>"; };
 		F4D630A6188D09D600A66D05 /* HDMoodButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMoodButton.m; sourceTree = "<group>"; };
@@ -104,6 +110,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F4798B6E18A6C17B00D3A627 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F41A68FB188C17F900D8FD0C /* HDDayViewController.h */,
+				F41A68FC188C17F900D8FD0C /* HDDayViewController.m */,
+				F4798B6718A6B4A800D3A627 /* HDSettingsViewController.h */,
+				F4798B6818A6B4A800D3A627 /* HDSettingsViewController.m */,
+				F4F09DC1188F7AC000140D12 /* HDYearViewController.h */,
+				F4F09DC2188F7AC000140D12 /* HDYearViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		F4798B6F18A6C18900D3A627 /* Views and Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F4F09DC4188F7D8900140D12 /* HDCalendarDayCell.h */,
+				F4F09DC5188F7D8900140D12 /* HDCalendarDayCell.m */,
+				F40B130B18905C160072BC08 /* HDCalendarMonthHeader.h */,
+				F40B130C18905C160072BC08 /* HDCalendarMonthHeader.m */,
+				F4D630A5188D09D600A66D05 /* HDMoodButton.h */,
+				F4D630A6188D09D600A66D05 /* HDMoodButton.m */,
+				F4798B7318A6C40500D3A627 /* HDDatePickerCell.h */,
+				F4798B7418A6C40500D3A627 /* HDDatePickerCell.m */,
+			);
+			name = "Views and Cells";
+			sourceTree = "<group>";
+		};
+		F4798B7018A6C1BB00D3A627 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F4798B6E18A6C17B00D3A627 /* View Controllers */,
+				F4EFF5BC1888836D00790675 /* HDAppDelegate.h */,
+				F4EFF5BD1888836D00790675 /* HDAppDelegate.m */,
+				F4EFF5DC1888838300790675 /* HDDataController.h */,
+				F4EFF5DD1888838300790675 /* HDDataController.m */,
+				F41A6900188C3AE200D8FD0C /* HDNotificationController.h */,
+				F41A6901188C3AE200D8FD0C /* HDNotificationController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		F4798B7118A6C1E600D3A627 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F4F09DC7188F875500140D12 /* NSDate+HDAdditions.h */,
+				F4F09DC8188F875500140D12 /* NSDate+HDAdditions.m */,
+				F4798B7818A6C9F200D3A627 /* HDNotificationController+TimeAsDate.h */,
+				F4798B7918A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		F4798B7218A6C1F400D3A627 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F4798B6D18A6BB8000D3A627 /* HDDismissableViewControllerDelegate.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		F4EFF5A11888836D00790675 = {
 			isa = PBXGroup;
 			children = (
@@ -137,29 +204,12 @@
 		F4EFF5B31888836D00790675 /* Happy Days */ = {
 			isa = PBXGroup;
 			children = (
-				F4EFF5BC1888836D00790675 /* HDAppDelegate.h */,
-				F4EFF5BD1888836D00790675 /* HDAppDelegate.m */,
-				F4EFF5DC1888838300790675 /* HDDataController.h */,
-				F4EFF5DD1888838300790675 /* HDDataController.m */,
-				F41A68FB188C17F900D8FD0C /* HDDayViewController.h */,
-				F41A68FC188C17F900D8FD0C /* HDDayViewController.m */,
-				F4F09DC1188F7AC000140D12 /* HDYearViewController.h */,
-				F4F09DC2188F7AC000140D12 /* HDYearViewController.m */,
-				F4F09DC4188F7D8900140D12 /* HDCalendarDayCell.h */,
-				F4F09DC5188F7D8900140D12 /* HDCalendarDayCell.m */,
-				F40B130B18905C160072BC08 /* HDCalendarMonthHeader.h */,
-				F40B130C18905C160072BC08 /* HDCalendarMonthHeader.m */,
-				F4D630A5188D09D600A66D05 /* HDMoodButton.h */,
-				F4D630A6188D09D600A66D05 /* HDMoodButton.m */,
-				F41A6900188C3AE200D8FD0C /* HDNotificationController.h */,
-				F41A6901188C3AE200D8FD0C /* HDNotificationController.m */,
+				F4798B7118A6C1E600D3A627 /* Categories */,
+				F4798B7018A6C1BB00D3A627 /* Controllers */,
+				F4798B7218A6C1F400D3A627 /* Protocols */,
+				F4798B6F18A6C18900D3A627 /* Views and Cells */,
 				F4EFF5BF1888836D00790675 /* Images.xcassets */,
 				F4EFF5B41888836D00790675 /* Supporting Files */,
-				F4F09DC7188F875500140D12 /* NSDate+HDAdditions.h */,
-				F4F09DC8188F875500140D12 /* NSDate+HDAdditions.m */,
-				F4798B6718A6B4A800D3A627 /* HDSettingsViewController.h */,
-				F4798B6818A6B4A800D3A627 /* HDSettingsViewController.m */,
-				F4798B6D18A6BB8000D3A627 /* HDDismissableViewControllerDelegate.h */,
 			);
 			path = "Happy Days";
 			sourceTree = "<group>";
@@ -294,6 +344,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EFF5DE1888838300790675 /* HDDataController.m in Sources */,
+				F4798B7518A6C40500D3A627 /* HDDatePickerCell.m in Sources */,
+				F4798B7A18A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m in Sources */,
 				F4F09DC3188F7AC000140D12 /* HDYearViewController.m in Sources */,
 				F4F09DC9188F875500140D12 /* NSDate+HDAdditions.m in Sources */,
 				F41A6902188C3AE200D8FD0C /* HDNotificationController.m in Sources */,

@@ -37,18 +37,19 @@ static NSString *const kUserDefaultsKeyLocalNotificationsTimeMinutes = @"org.net
         [[NSUserDefaults standardUserDefaults] setBool:_localNotificationEnabled forKey:kUserDefaultsKeyLocalNotificationsEnabled];
         
         if (_localNotificationEnabled) {
-            NSDate *fireDate = [self hd_fireDateForDate:[NSDate date]];
-            
-            UILocalNotification *notification = [[UILocalNotification alloc] init];
-            notification.alertAction = @"Tell Me";
-            notification.alertBody = @"How was today?";
-            notification.timeZone = [NSTimeZone defaultTimeZone];
-            notification.fireDate = fireDate;
-            notification.repeatInterval = NSCalendarUnitDay;
-            [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+            [self hd_scheduleLocalNotificationWithCurrentSettings];
         }
         else {
             [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        }
+    }
+}
+
+- (void)setTimeMinutes:(NSUInteger)timeMinutes {
+    if (timeMinutes != _timeMinutes) {
+        _timeMinutes = timeMinutes;
+        if (self.isLocalNotificationEnabled) {
+            [self hd_scheduleLocalNotificationWithCurrentSettings];
         }
     }
 }
@@ -84,6 +85,29 @@ static NSString *const kUserDefaultsKeyLocalNotificationsTimeMinutes = @"org.net
     }
 
     return fireDate;
+}
+
+- (void)hd_scheduleLocalNotificationWithCurrentSettings {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    NSDate *fireDate = [self hd_fireDateForDate:[NSDate date]];
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertAction = @"Tell Me";
+    notification.alertBody = @"How was today?";
+    notification.timeZone = [NSTimeZone localTimeZone];
+    notification.fireDate = fireDate;
+    notification.repeatInterval = NSCalendarUnitDay;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    
+    [self hd_debugPrintAllScheduledLocalNotifications];
+}
+
+- (void)hd_debugPrintAllScheduledLocalNotifications {
+    NSArray *scheduledLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    NSLog(@"%lu local notification(s) scheduled", [scheduledLocalNotifications count]);
+    [scheduledLocalNotifications enumerateObjectsUsingBlock:^(UILocalNotification *localNotification, NSUInteger idx, BOOL *stop) {
+        NSLog(@"%lu: %@, fires at %@, repeat interval = %lu", idx + 1, localNotification.alertBody, localNotification.fireDate, localNotification.repeatInterval);
+    }];
 }
 
 @end
