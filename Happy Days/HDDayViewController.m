@@ -79,10 +79,6 @@
     }
 }
 
-- (void)hd_handleNotificationSwitchValueChanged:(UISwitch*)notificationSwitch {
-    self.notificationController.localNotificationEnabled = notificationSwitch.isOn;
-}
-
 - (void)hd_setupSubviews {
     
     UILabel *label = [[UILabel alloc] init];
@@ -116,26 +112,12 @@
     [badButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:badButton];
     
-    UISwitch *notificationSwitch = [[UISwitch alloc] init];
-    notificationSwitch.translatesAutoresizingMaskIntoConstraints = NO;
-    [notificationSwitch addTarget:self action:@selector(hd_handleNotificationSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-    notificationSwitch.on = self.notificationController.localNotificationEnabled;
-    [self.view addSubview:notificationSwitch];
-    
-    UILabel *notificationLabel = [[UILabel alloc] init];
-    notificationLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    notificationLabel.text = @"Remind me each day";
-    [self.view addSubview:notificationLabel];
-    
     id topGuide = self.topLayoutGuide;
-    NSDictionary *views = NSDictionaryOfVariableBindings(notificationSwitch, notificationLabel, topGuide, label, goodButton, averageButton, badButton);
+    NSDictionary *views = NSDictionaryOfVariableBindings(topGuide, label, goodButton, averageButton, badButton);
     NSDictionary *metrics = @{ @"verticalSpacing": @20 };
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-verticalSpacing-[label]-verticalSpacing-[goodButton]-verticalSpacing-[averageButton]-verticalSpacing-[badButton]" options:NSLayoutFormatAlignAllCenterX metrics:metrics views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-|" options:0 metrics:nil views:views]];
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[badButton]-(>=0)-[notificationSwitch]-|" options:0 metrics:metrics views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[notificationSwitch]-[notificationLabel]" options:NSLayoutFormatAlignAllCenterY metrics:nil views:views]];
     
     self.buttons = @[ goodButton, averageButton, badButton ];
 }
