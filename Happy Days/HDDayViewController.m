@@ -9,12 +9,18 @@
 #import "HDDayViewController.h"
 #import "HDYearViewController.h"
 #import "HDMoodButton.h"
+#import "HDSettingsViewController.h"
+#import "HDDismissableViewControllerDelegate.h"
 
 @interface HDDayViewController ()
 @property (nonatomic) UIButton *goodButton;
 @property (nonatomic) UIButton *averageButton;
 @property (nonatomic) UIButton *badButton;
 @property (nonatomic) NSArray *buttons;
+@end
+
+@interface HDDayViewController() <HDDismissableViewControllerDelegate>
+
 @end
 
 @implementation HDDayViewController
@@ -39,6 +45,7 @@
     [super viewDidLoad];
     [self hd_setupSubviews];
 
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleSettingsButton:)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Year" style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
 }
 
@@ -142,6 +149,20 @@
     yearVC.dataController = self.dataController;
     
     [self.navigationController pushViewController:yearVC animated:YES];
+}
+
+- (void)hd_handleSettingsButton:(id)sender {
+    HDSettingsViewController *vc = [[HDSettingsViewController alloc] init];
+    vc.notificationController = self.notificationController;
+    vc.delegate = self;
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nc animated:YES completion:nil];
+}
+
+#pragma mark - HDDismissableViewControllerDelegate methods
+
+- (void)viewControllerShouldDismiss:(UIViewController *)viewController wasCancelled:(bool)wasCancelled {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
