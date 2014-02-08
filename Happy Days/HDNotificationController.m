@@ -8,7 +8,8 @@
 
 #import "HDNotificationController.h"
 
-static NSString *const kLocalNotificationsEnabledUserDefaultsKey = @"org.netcetera.happydays.notificationsEnabled";
+static NSString *const kUserDefaultsKeyLocalNotificationsEnabled = @"org.netcetera.happydays.notificationsEnabled";
+static NSString *const kUserDefaultsKeyLocalNotificationsTimeMinutes = @"org.netcetera.happydays.notificationsTimeMinutes";
 
 @interface HDNotificationController()
 @property (nonatomic, strong) NSCalendar *calendar;
@@ -19,7 +20,12 @@ static NSString *const kLocalNotificationsEnabledUserDefaultsKey = @"org.netcete
 - (id)init {
     self = [super init];
     if (self) {
-        _localNotificationEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kLocalNotificationsEnabledUserDefaultsKey];
+        [[NSUserDefaults standardUserDefaults] registerDefaults:@{
+            kUserDefaultsKeyLocalNotificationsEnabled: @(true),
+            kUserDefaultsKeyLocalNotificationsTimeMinutes: @(21*60),
+        }];
+        _localNotificationEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsKeyLocalNotificationsEnabled];
+        _timeMinutes = [[NSUserDefaults standardUserDefaults] integerForKey:kUserDefaultsKeyLocalNotificationsTimeMinutes];
         _calendar = [NSCalendar autoupdatingCurrentCalendar];
     }
     return self;
@@ -28,7 +34,7 @@ static NSString *const kLocalNotificationsEnabledUserDefaultsKey = @"org.netcete
 - (void)setLocalNotificationEnabled:(bool)localNotificationEnabled {
     if (localNotificationEnabled != _localNotificationEnabled) {
         _localNotificationEnabled = localNotificationEnabled;
-        [[NSUserDefaults standardUserDefaults] setBool:_localNotificationEnabled forKey:kLocalNotificationsEnabledUserDefaultsKey];
+        [[NSUserDefaults standardUserDefaults] setBool:_localNotificationEnabled forKey:kUserDefaultsKeyLocalNotificationsEnabled];
         
         if (_localNotificationEnabled) {
             NSDate *fireDate = [self hd_fireDateForDate:[NSDate date]];

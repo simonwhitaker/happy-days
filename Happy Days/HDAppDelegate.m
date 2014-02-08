@@ -10,6 +10,7 @@
 #import "HDDataController.h"
 #import "HDDayViewController.h"
 #import "HDNotificationController.h"
+#import "HDSettingsViewController.h"
 
 @interface HDAppDelegate()
 @property (nonatomic) HDDataController *dataController;
@@ -26,11 +27,12 @@
 
     self.dataController = [[HDDataController alloc] init];
     self.notificationController = [[HDNotificationController alloc] init];
-    self.notificationController.timeMinutes = 60 * 21; // 9pm
     
     HDDayViewController *dayViewController = [[HDDayViewController alloc] init];
     dayViewController.dataController = self.dataController;
     dayViewController.notificationController = self.notificationController;
+    
+    
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dayViewController];
     
