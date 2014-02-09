@@ -11,5 +11,6 @@
 @interface NSDate (HDAdditions)
 
 - (bool)hd_isToday;
+- (bool)hd_isTodayOrEarlier;
 
 @end

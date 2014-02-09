@@ -163,7 +163,7 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSDate *date = [self hd_dateForIndexPath:indexPath];
-    if (date) {
+    if (date && [date hd_isTodayOrEarlier]) {
         HDDayViewController *vc = [[HDDayViewController alloc] init];
         vc.date = date;
         vc.dataController = self.dataController;

@@ -17,4 +17,8 @@
     return [selfDateComps isEqual:todayDateComps];
 }
 
+- (bool)hd_isTodayOrEarlier {
+    return [[NSDate date] timeIntervalSinceDate:self] > 0.0 || [self hd_isToday];
+}
+
 @end
