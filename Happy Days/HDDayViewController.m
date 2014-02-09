@@ -10,6 +10,7 @@
 #import "HDYearViewController.h"
 #import "HDMoodButton.h"
 #import "NSDate+HDAdditions.h"
+#import "UIColor+HDAdditions.h"
 
 @interface HDDayViewController ()
 @property (nonatomic) UIButton *goodButton;
@@ -78,7 +79,7 @@
     
     UILabel *label = [[UILabel alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24.0];
     NSString *dayString;
     if ([self.date hd_isToday]) {
         dayString = @"today";
@@ -90,33 +91,46 @@
     label.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label];
     
-    UIButton *goodButton = [[HDMoodButton alloc] init];
+    UIColor *normalButtonBackgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    UIColor *normalButtonTitleColor = [UIColor darkGrayColor];
+    UIColor *selectedButtonTitleColor = [UIColor whiteColor];
+    
+    HDMoodButton *goodButton = [[HDMoodButton alloc] init];
     goodButton.translatesAutoresizingMaskIntoConstraints = NO;
     goodButton.tag = HDMoodGood;
-    goodButton.backgroundColor = [UIColor colorWithRed:0.780 green:0.941 blue:0.620 alpha:1.000];
+    [goodButton setTitleColor:normalButtonTitleColor forState:UIControlStateNormal];
+    [goodButton setBackgroundColor:normalButtonBackgroundColor forState:UIControlStateNormal];
+    [goodButton setTitleColor:selectedButtonTitleColor forState:UIControlStateSelected];
+    [goodButton setBackgroundColor:[UIColor hd_goodBackgroundColor] forState:UIControlStateSelected];
     [goodButton setTitle:@"Good" forState:UIControlStateNormal];
     [goodButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goodButton];
     
-    UIButton *averageButton = [[HDMoodButton alloc] init];
+    HDMoodButton *averageButton = [[HDMoodButton alloc] init];
     averageButton.translatesAutoresizingMaskIntoConstraints = NO;
     averageButton.tag = HDMoodAverage;
-    averageButton.backgroundColor = [UIColor colorWithRed:1.000 green:0.965 blue:0.678 alpha:1.000];
+    [averageButton setTitleColor:normalButtonTitleColor forState:UIControlStateNormal];
+    [averageButton setBackgroundColor:normalButtonBackgroundColor forState:UIControlStateNormal];
+    [averageButton setTitleColor:selectedButtonTitleColor forState:UIControlStateSelected];
+    [averageButton setBackgroundColor:[UIColor hd_averageBackgroundColor] forState:UIControlStateSelected];
     [averageButton setTitle:@"Average" forState:UIControlStateNormal];
     [averageButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:averageButton];
     
-    UIButton *badButton = [[HDMoodButton alloc] init];
+    HDMoodButton *badButton = [[HDMoodButton alloc] init];
     badButton.translatesAutoresizingMaskIntoConstraints = NO;
     badButton.tag = HDMoodBad;
-    badButton.backgroundColor = [UIColor colorWithRed:0.980 green:0.647 blue:0.616 alpha:1.000];
+    [badButton setTitleColor:normalButtonTitleColor forState:UIControlStateNormal];
+    [badButton setBackgroundColor:normalButtonBackgroundColor forState:UIControlStateNormal];
+    [badButton setTitleColor:selectedButtonTitleColor forState:UIControlStateSelected];
+    [badButton setBackgroundColor:[UIColor hd_badBackgroundColor] forState:UIControlStateSelected];
     [badButton setTitle:@"Bad" forState:UIControlStateNormal];
     [badButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:badButton];
     
     id topGuide = self.topLayoutGuide;
     NSDictionary *views = NSDictionaryOfVariableBindings(topGuide, label, goodButton, averageButton, badButton);
-    NSDictionary *metrics = @{ @"verticalSpacing": @20 };
+    NSDictionary *metrics = @{ @"verticalSpacing": @40 };
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-verticalSpacing-[label]-verticalSpacing-[goodButton]-verticalSpacing-[averageButton]-verticalSpacing-[badButton]" options:NSLayoutFormatAlignAllCenterX metrics:metrics views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-|" options:0 metrics:nil views:views]];

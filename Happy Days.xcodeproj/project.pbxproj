@@ -14,6 +14,7 @@
 		F4798B7518A6C40500D3A627 /* HDDatePickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4798B7418A6C40500D3A627 /* HDDatePickerCell.m */; };
 		F4798B7A18A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m in Sources */ = {isa = PBXBuildFile; fileRef = F4798B7918A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m */; };
 		F4A3045B188C672B00AB7FF6 /* HDNotificationControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */; };
+		F4AB835318A8229B00AAB83A /* UIColor+HDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AB835218A8229B00AAB83A /* UIColor+HDAdditions.m */; };
 		F4D630A7188D09D600A66D05 /* HDMoodButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D630A6188D09D600A66D05 /* HDMoodButton.m */; };
 		F4EFF5AE1888836D00790675 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AD1888836D00790675 /* Foundation.framework */; };
 		F4EFF5B01888836D00790675 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EFF5AF1888836D00790675 /* CoreGraphics.framework */; };
@@ -58,6 +59,8 @@
 		F4798B7818A6C9F200D3A627 /* HDNotificationController+TimeAsDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HDNotificationController+TimeAsDate.h"; sourceTree = "<group>"; };
 		F4798B7918A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HDNotificationController+TimeAsDate.m"; sourceTree = "<group>"; };
 		F4A3045A188C672B00AB7FF6 /* HDNotificationControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationControllerTests.m; sourceTree = "<group>"; };
+		F4AB835118A8229B00AAB83A /* UIColor+HDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HDAdditions.h"; sourceTree = "<group>"; };
+		F4AB835218A8229B00AAB83A /* UIColor+HDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HDAdditions.m"; sourceTree = "<group>"; };
 		F4D630A5188D09D600A66D05 /* HDMoodButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMoodButton.h; sourceTree = "<group>"; };
 		F4D630A6188D09D600A66D05 /* HDMoodButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMoodButton.m; sourceTree = "<group>"; };
 		F4EFF5AA1888836D00790675 /* Happy Days.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Happy Days.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,6 +162,8 @@
 				F4F09DC8188F875500140D12 /* NSDate+HDAdditions.m */,
 				F4798B7818A6C9F200D3A627 /* HDNotificationController+TimeAsDate.h */,
 				F4798B7918A6C9F200D3A627 /* HDNotificationController+TimeAsDate.m */,
+				F4AB835118A8229B00AAB83A /* UIColor+HDAdditions.h */,
+				F4AB835218A8229B00AAB83A /* UIColor+HDAdditions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				F4F09DC6188F7D8900140D12 /* HDCalendarDayCell.m in Sources */,
 				F40B130D18905C160072BC08 /* HDCalendarMonthHeader.m in Sources */,
 				F4EFF5BE1888836D00790675 /* HDAppDelegate.m in Sources */,
+				F4AB835318A8229B00AAB83A /* UIColor+HDAdditions.m in Sources */,
 				F4798B6918A6B4A800D3A627 /* HDSettingsViewController.m in Sources */,
 				F4EFF5BA1888836D00790675 /* main.m in Sources */,
 			);
