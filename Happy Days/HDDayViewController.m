@@ -35,6 +35,13 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // If this is a day we've already recorded, we need the current selection to be visible
+    [self hd_updateDisplay];
+}
+
 - (void)setDate:(NSDate *)date {
     if (date != _date) {
         _date = date;
