@@ -30,7 +30,9 @@
     [super viewDidLoad];
     [self hd_setupSubviews];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"851-calendar"] style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
+    if (self == [self.navigationController.viewControllers firstObject]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"851-calendar"] style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
+    }
 }
 
 - (void)setDate:(NSDate *)date {
