@@ -11,8 +11,9 @@
 #import "HDDayViewController.h"
 #import "HDNotificationController.h"
 #import "HDSettingsViewController.h"
+#import "HDDismissableViewControllerDelegate.h"
 
-@interface HDAppDelegate()
+@interface HDAppDelegate() <HDDismissableViewControllerDelegate>
 @property (nonatomic) HDDataController *dataController;
 @property (nonatomic) HDNotificationController *notificationController;
 @end
@@ -32,7 +33,7 @@
     dayViewController.dataController = self.dataController;
     dayViewController.notificationController = self.notificationController;
     
-    
+    dayViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"740-gear"] style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleSettingsButton:)];
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:dayViewController];
     
@@ -67,6 +68,20 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)hd_handleSettingsButton:(id)sender {
+    HDSettingsViewController *vc = [[HDSettingsViewController alloc] init];
+    vc.notificationController = self.notificationController;
+    vc.delegate = self;
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self.window.rootViewController presentViewController:nc animated:YES completion:nil];
+}
+
+#pragma mark - HDDismissableViewControllerDelegate methods
+
+- (void)viewControllerShouldDismiss:(UIViewController *)viewController wasCancelled:(bool)wasCancelled {
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
