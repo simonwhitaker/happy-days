@@ -19,17 +19,6 @@
 
 @implementation HDDayViewController
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hd_updateDisplay) name:UIApplicationWillEnterForegroundNotification object:nil];
-        
-        // TODO: on significant time change we should check to see if the view is foremost; if so, show a dialog asking the user if they want to switch to the new date
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hd_updateDisplay) name:UIApplicationSignificantTimeChangeNotification object:nil];
-    }
-    return self;
-}
-
 - (void)loadView {
     UIView *rootView = [[UIView alloc] init];
     self.view = rootView;
@@ -42,17 +31,11 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"851-calendar"] style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self hd_updateDisplay];
-}
-
-- (NSDate *)date {
-    if (_date) {
-        return _date;
+- (void)setDate:(NSDate *)date {
+    if (date != _date) {
+        _date = date;
+        [self hd_updateDisplay];
     }
-    // If no date is set, return the current date. Don't store in an ivar, generate and return each time it's called for.
-    return [NSDate date];
 }
 
 #pragma mark - Private methods
