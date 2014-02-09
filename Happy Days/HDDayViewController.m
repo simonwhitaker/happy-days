@@ -9,6 +9,7 @@
 #import "HDDayViewController.h"
 #import "HDYearViewController.h"
 #import "HDMoodButton.h"
+#import "NSDate+HDAdditions.h"
 
 @interface HDDayViewController ()
 @property (nonatomic) UIButton *goodButton;
@@ -21,6 +22,7 @@
 
 - (void)loadView {
     UIView *rootView = [[UIView alloc] init];
+    rootView.backgroundColor = [UIColor whiteColor];
     self.view = rootView;
 }
 
@@ -68,7 +70,14 @@
     UILabel *label = [[UILabel alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
     label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    label.text = @"How was today?";
+    NSString *dayString;
+    if ([self.date hd_isToday]) {
+        dayString = @"today";
+    }
+    else {
+        dayString = @"this day";
+    }
+    label.text = [NSString stringWithFormat:@"How was %@?", dayString];
     label.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label];
     
