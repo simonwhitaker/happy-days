@@ -10,4 +10,6 @@
 
 @interface HDMoodButton : UIButton
 
+- (void)setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
+
 @end
