@@ -47,10 +47,18 @@
     [self hd_updateDisplay];
 }
 
+- (NSDate *)date {
+    if (_date) {
+        return _date;
+    }
+    // If no date is set, return the current date. Don't store in an ivar, generate and return each time it's called for.
+    return [NSDate date];
+}
+
 #pragma mark - Private methods
 
 - (void)hd_handleButtonTap:(UIButton*)button {
-    [self.dataController setMood:button.tag ForDate:[NSDate date]];
+    [self.dataController setMood:button.tag ForDate:self.date];
     
     // Now that they've given feedback for today, don't post a notification until tomorrow (if it's still due today)
     [self.notificationController postponeUntilTomorrow];
@@ -64,9 +72,9 @@
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
         dateFormatter.dateStyle = NSDateFormatterLongStyle;
     }
-    self.title = [dateFormatter stringFromDate:[NSDate date]];
+    self.title = [dateFormatter stringFromDate:self.date];
 
-    HDMood recordedMood = [self.dataController moodForDate:[NSDate date]];
+    HDMood recordedMood = [self.dataController moodForDate:self.date];
     for (UIButton *button in self.buttons) {
         button.selected = recordedMood == button.tag;
     }
