@@ -10,6 +10,7 @@
 #import "HDYearViewController.h"
 #import "HDMoodButton.h"
 #import "NSDate+HDAdditions.h"
+#import "UIColor+HDAdditions.h"
 
 @interface HDDayViewController ()
 @property (nonatomic) UIButton *goodButton;
@@ -100,7 +101,7 @@
     [goodButton setTitleColor:normalButtonTitleColor forState:UIControlStateNormal];
     [goodButton setBackgroundColor:normalButtonBackgroundColor forState:UIControlStateNormal];
     [goodButton setTitleColor:selectedButtonTitleColor forState:UIControlStateSelected];
-    [goodButton setBackgroundColor:[UIColor colorWithRed:0.494 green:0.827 blue:0.129 alpha:1.000] forState:UIControlStateSelected];
+    [goodButton setBackgroundColor:[UIColor hd_goodBackgroundColor] forState:UIControlStateSelected];
     [goodButton setTitle:@"Good" forState:UIControlStateNormal];
     [goodButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goodButton];
@@ -111,7 +112,7 @@
     [averageButton setTitleColor:normalButtonTitleColor forState:UIControlStateNormal];
     [averageButton setBackgroundColor:normalButtonBackgroundColor forState:UIControlStateNormal];
     [averageButton setTitleColor:selectedButtonTitleColor forState:UIControlStateSelected];
-    [averageButton setBackgroundColor:[UIColor colorWithRed:0.961 green:0.651 blue:0.137 alpha:1.000] forState:UIControlStateSelected];
+    [averageButton setBackgroundColor:[UIColor hd_averageBackgroundColor] forState:UIControlStateSelected];
     [averageButton setTitle:@"Average" forState:UIControlStateNormal];
     [averageButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:averageButton];
@@ -122,7 +123,7 @@
     [badButton setTitleColor:normalButtonTitleColor forState:UIControlStateNormal];
     [badButton setBackgroundColor:normalButtonBackgroundColor forState:UIControlStateNormal];
     [badButton setTitleColor:selectedButtonTitleColor forState:UIControlStateSelected];
-    [badButton setBackgroundColor:[UIColor colorWithRed:0.816 green:0.008 blue:0.106 alpha:1.000] forState:UIControlStateSelected];
+    [badButton setBackgroundColor:[UIColor hd_badBackgroundColor] forState:UIControlStateSelected];
     [badButton setTitle:@"Bad" forState:UIControlStateNormal];
     [badButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:badButton];

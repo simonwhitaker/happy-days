@@ -12,6 +12,7 @@
 #import "HDDayViewController.h"
 
 #import "NSDate+HDAdditions.h"
+#import "UIColor+HDAdditions.h"
 
 static NSString *const kCalendarDayViewIdentifier = @"CalendarDayViewIdentifier";
 static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIdentifier";
@@ -78,20 +79,20 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
             UIColor *backgroundColor = self.collectionView.backgroundColor;
             switch (mood) {
                 case HDMoodGood:
-                    backgroundColor = [UIColor colorWithRed:0.780 green:0.941 blue:0.620 alpha:1.000];
+                    backgroundColor = [UIColor hd_goodBackgroundColor];
                     break;
                 case HDMoodAverage:
-                    backgroundColor = [UIColor colorWithRed:1.000 green:0.965 blue:0.678 alpha:1.000];
+                    backgroundColor = [UIColor hd_averageBackgroundColor];
                     break;
                 case HDMoodBad:
-                    backgroundColor = [UIColor colorWithRed:0.980 green:0.647 blue:0.616 alpha:1.000];
+                    backgroundColor = [UIColor hd_badBackgroundColor];
                     break;
                 default:
                     break;
             }
             cell.dayNumberLabel.backgroundColor = backgroundColor;
         }
-
+        cell.dayNumberLabel.textColor = mood == HDMoodNotRecorded ? [UIColor darkGrayColor] : [UIColor whiteColor];
         cell.dayNumberLabel.text = [NSString stringWithFormat:@"%li", (long)day];
         cell.dayNumberLabel.font = [date hd_isToday] ? [UIFont fontWithName:@"HelveticaNeue-Bold" size:16] : [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
     }
