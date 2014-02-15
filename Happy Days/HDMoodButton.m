@@ -8,8 +8,7 @@
 
 #import "HDMoodButton.h"
 
-static const CGSize kButtonSize = { 220, 70 };
-static const CGFloat kFontSize = 20.0;
+static const CGFloat kFontSize = 48.0;
 
 @interface HDMoodButton()
 @property (nonatomic) NSMutableDictionary *backgroundColorsByState;
@@ -21,9 +20,10 @@ static const CGFloat kFontSize = 20.0;
     self = [super init];
     if (self) {
         _backgroundColorsByState = [NSMutableDictionary dictionary];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kButtonSize.height]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:kButtonSize.width]];
-        self.layer.cornerRadius = 4.0;
+        self.titleLabel.textAlignment = NSTextAlignmentLeft;
+        self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        self.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        self.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         [self hd_updateAppearance];
     }
     return self;
@@ -43,7 +43,7 @@ static const CGFloat kFontSize = 20.0;
 }
 
 - (void)hd_updateAppearance {
-    self.titleLabel.font = self.selected ? [UIFont fontWithName:@"HelveticaNeue" size:kFontSize] : [UIFont fontWithName:@"HelveticaNeue-Light" size:kFontSize];
+    self.titleLabel.font = self.selected ? [UIFont fontWithName:@"HelveticaNeue-Thin" size:kFontSize] : [UIFont fontWithName:@"HelveticaNeue-Thin" size:kFontSize];
     UIControlState state;
 
     if (!self.enabled) {

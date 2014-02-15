@@ -21,6 +21,7 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
 
 @property (nonatomic) NSCalendar *calendar;
 @property (nonatomic) NSCache *numberOfSpacersForSectionCache;
+@property (nonatomic) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -52,6 +53,12 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    
+    if (self.selectedIndexPath) {
+        [self.collectionView reloadItemsAtIndexPaths:@[self.selectedIndexPath]];
+    }
     
     if (self.isMovingToParentViewController) {
         NSIndexPath *indexPath = [self hd_indexPathForDate:[NSDate date]];
@@ -169,6 +176,7 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
         vc.date = date;
         vc.dataController = self.dataController;
         [self.navigationController pushViewController:vc animated:YES];
+        self.selectedIndexPath = indexPath;
     }
 }
 
