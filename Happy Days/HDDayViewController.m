@@ -188,9 +188,7 @@
 }
 
 - (void)hd_handleYearButton:(id)sender {
-    if ([self.navigationController.viewControllers count] > 1) {
-        [self.navigationController popViewControllerAnimated:YES];
-    } else {
+    if ([self hd_isHomeView]) {
         HDYearViewController *yearVC = [[HDYearViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
         
         NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -199,6 +197,8 @@
         yearVC.dataController = self.dataController;
         
         [self.navigationController pushViewController:yearVC animated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
