@@ -173,19 +173,21 @@
     [calendarButton addTarget:self action:@selector(hd_handleYearButton:) forControlEvents:UIControlEventTouchUpInside];
     calendarButton.tintColor = [UIColor whiteColor];
     [self.view addSubview:calendarButton];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:calendarButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-10]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:calendarButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0-self.badButton.contentEdgeInsets.bottom]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:calendarButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-20]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:calendarButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-20]];
     self.calendarButton = calendarButton;
 
-    UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    settingsButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [settingsButton setImage:[[UIImage imageNamed:@"740-gear"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [settingsButton addTarget:self action:@selector(hd_handleSettingsButton:) forControlEvents:UIControlEventTouchUpInside];
-    settingsButton.tintColor = [UIColor whiteColor];
-    [self.view addSubview:settingsButton];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:settingsButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:calendarButton attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-10]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:settingsButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0-self.badButton.contentEdgeInsets.bottom]];
-    self.settingsButton = settingsButton;
+    if ([self hd_isHomeView]) {
+        UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        settingsButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [settingsButton setImage:[[UIImage imageNamed:@"740-gear"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [settingsButton addTarget:self action:@selector(hd_handleSettingsButton:) forControlEvents:UIControlEventTouchUpInside];
+        settingsButton.tintColor = [UIColor whiteColor];
+        [self.view addSubview:settingsButton];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:settingsButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:calendarButton attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-20]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:settingsButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-20]];
+        self.settingsButton = settingsButton;
+    }
 }
 
 - (void)hd_handleYearButton:(id)sender {
@@ -209,6 +211,10 @@
     vc.delegate = self;
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nc animated:YES completion:nil];
+}
+
+- (bool)hd_isHomeView {
+    return self == self.navigationController.viewControllers.firstObject;
 }
 
 #pragma mark - HDDismissableViewControllerDelegate methods
