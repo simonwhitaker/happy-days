@@ -76,7 +76,8 @@
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
         dateFormatter.dateStyle = NSDateFormatterLongStyle;
     }
-    self.title = [dateFormatter stringFromDate:self.date];
+    
+    self.title = [self hd_isHomeView] ? @"Today" : [dateFormatter stringFromDate:self.date];
 
     HDMood recordedMood = [self.dataController moodForDate:self.date];
     for (UIButton *button in self.buttons) {
