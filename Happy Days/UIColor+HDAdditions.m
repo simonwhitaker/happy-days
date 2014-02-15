@@ -11,15 +11,15 @@
 @implementation UIColor (HDAdditions)
 
 + (UIColor*)hd_goodBackgroundColor {
-    return [UIColor colorWithRed:0.494 green:0.827 blue:0.129 alpha:1.000];
+    return [UIColor colorWithRed:0.467 green:0.776 blue:0.141 alpha:1.000];
 }
 
 + (UIColor*)hd_averageBackgroundColor {
-    return [UIColor colorWithRed:0.961 green:0.651 blue:0.137 alpha:1.000];
+    return [UIColor colorWithRed:0.945 green:0.816 blue:0.180 alpha:1.000];
 }
 
 + (UIColor*)hd_badBackgroundColor {
-    return [UIColor colorWithRed:0.816 green:0.008 blue:0.106 alpha:1.000];
+    return [UIColor colorWithRed:0.824 green:0.125 blue:0.118 alpha:1.000];
 }
 
 @end

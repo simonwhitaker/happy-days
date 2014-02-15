@@ -7,16 +7,20 @@
 //
 
 #import "HDDayViewController.h"
+#import "HDSettingsViewController.h"
 #import "HDYearViewController.h"
 #import "HDMoodButton.h"
 #import "NSDate+HDAdditions.h"
 #import "UIColor+HDAdditions.h"
 
-@interface HDDayViewController ()
+@interface HDDayViewController () <HDDismissableViewControllerDelegate>
 @property (nonatomic) UIButton *goodButton;
 @property (nonatomic) UIButton *averageButton;
 @property (nonatomic) UIButton *badButton;
+@property (nonatomic) UIButton *calendarButton;
+@property (nonatomic) UIButton *settingsButton;
 @property (nonatomic) NSArray *buttons;
+@property (nonatomic) UILabel *titleLabel;
 @end
 
 @implementation HDDayViewController
@@ -30,10 +34,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self hd_setupSubviews];
-
-    if (self == [self.navigationController.viewControllers firstObject]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"851-calendar"] style:UIBarButtonItemStylePlain target:self action:@selector(hd_handleYearButton:)];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -41,6 +41,7 @@
     
     // If this is a day we've already recorded, we need the current selection to be visible
     [self hd_updateDisplay];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)setDate:(NSDate *)date {
@@ -48,6 +49,10 @@
         _date = date;
         [self hd_updateDisplay];
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return self.goodButton.selected ? UIStatusBarStyleLightContent : UIStatusBarStyleDefault;
 }
 
 #pragma mark - Private methods
@@ -67,29 +72,23 @@
         dateFormatter.timeStyle = NSDateFormatterNoStyle;
         dateFormatter.dateStyle = NSDateFormatterLongStyle;
     }
-    self.title = [dateFormatter stringFromDate:self.date];
+    
+    self.title = [self hd_isHomeView] ? @"Today" : [dateFormatter stringFromDate:self.date];
 
     HDMood recordedMood = [self.dataController moodForDate:self.date];
     for (UIButton *button in self.buttons) {
         button.selected = recordedMood == button.tag;
     }
+    
+    self.titleLabel.textColor = self.goodButton.selected ? [UIColor whiteColor] : [UIColor darkGrayColor];
+    self.calendarButton.tintColor = self.badButton.selected ? [UIColor whiteColor] : [UIColor darkGrayColor];
+    self.settingsButton.tintColor = self.badButton.selected ? [UIColor whiteColor] : [UIColor darkGrayColor];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
 }
 
 - (void)hd_setupSubviews {
-    
-    UILabel *label = [[UILabel alloc] init];
-    label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24.0];
-    NSString *dayString;
-    if ([self.date hd_isToday]) {
-        dayString = @"today";
-    }
-    else {
-        dayString = @"this day";
-    }
-    label.text = [NSString stringWithFormat:@"How was %@?", dayString];
-    label.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:label];
     
     UIColor *normalButtonBackgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     UIColor *normalButtonTitleColor = [UIColor darkGrayColor];
@@ -105,6 +104,10 @@
     [goodButton setTitle:@"Good" forState:UIControlStateNormal];
     [goodButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goodButton];
+    self.goodButton = goodButton;
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:goodButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:goodButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:goodButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.33 constant:0.0]];
     
     HDMoodButton *averageButton = [[HDMoodButton alloc] init];
     averageButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -116,6 +119,10 @@
     [averageButton setTitle:@"Average" forState:UIControlStateNormal];
     [averageButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:averageButton];
+    self.averageButton = averageButton;
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:averageButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:averageButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:averageButton attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeHeight multiplier:0.33 constant:0.0]];
     
     HDMoodButton *badButton = [[HDMoodButton alloc] init];
     badButton.translatesAutoresizingMaskIntoConstraints = NO;
@@ -127,26 +134,90 @@
     [badButton setTitle:@"Bad" forState:UIControlStateNormal];
     [badButton addTarget:self action:@selector(hd_handleButtonTap:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:badButton];
+    self.badButton = badButton;
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:badButton attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:badButton attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0]];
+
+    UILabel *label = [[UILabel alloc] init];
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:24.0];
+    label.textColor = [UIColor whiteColor];
+    NSString *dayString;
+    if ([self.date hd_isToday]) {
+        dayString = @"today";
+    }
+    else {
+        dayString = @"this day";
+    }
+    label.text = [NSString stringWithFormat:@"How was %@?", dayString];
+    label.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:label];
+    self.titleLabel = label;
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:10.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.topLayoutGuide attribute:NSLayoutAttributeBottom multiplier:1.0 constant:5.0]];
     
     id topGuide = self.topLayoutGuide;
     NSDictionary *views = NSDictionaryOfVariableBindings(topGuide, label, goodButton, averageButton, badButton);
-    NSDictionary *metrics = @{ @"verticalSpacing": @40 };
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-verticalSpacing-[label]-verticalSpacing-[goodButton]-verticalSpacing-[averageButton]-verticalSpacing-[badButton]" options:NSLayoutFormatAlignAllCenterX metrics:metrics views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[label]-|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[goodButton][averageButton][badButton]|" options:0 metrics:nil views:views]];
     
     self.buttons = @[ goodButton, averageButton, badButton ];
+    
+    UIButton *calendarButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    calendarButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [calendarButton setImage:[[UIImage imageNamed:@"851-calendar"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [calendarButton addTarget:self action:@selector(hd_handleYearButton:) forControlEvents:UIControlEventTouchUpInside];
+    calendarButton.tintColor = [UIColor whiteColor];
+    [self.view addSubview:calendarButton];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:calendarButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-20]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:calendarButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-20]];
+    self.calendarButton = calendarButton;
+
+    if ([self hd_isHomeView]) {
+        UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        settingsButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [settingsButton setImage:[[UIImage imageNamed:@"740-gear"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+        [settingsButton addTarget:self action:@selector(hd_handleSettingsButton:) forControlEvents:UIControlEventTouchUpInside];
+        settingsButton.tintColor = [UIColor whiteColor];
+        [self.view addSubview:settingsButton];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:settingsButton attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:calendarButton attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-20]];
+        [self.view addConstraint:[NSLayoutConstraint constraintWithItem:settingsButton attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:-20]];
+        self.settingsButton = settingsButton;
+    }
 }
 
 - (void)hd_handleYearButton:(id)sender {
-    HDYearViewController *yearVC = [[HDYearViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *dateComps = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
-    yearVC.year = dateComps.year;
-    yearVC.dataController = self.dataController;
-    
-    [self.navigationController pushViewController:yearVC animated:YES];
+    if ([self hd_isHomeView]) {
+        HDYearViewController *yearVC = [[HDYearViewController alloc] initWithCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init]];
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *dateComps = [calendar components:NSCalendarUnitYear fromDate:[NSDate date]];
+        yearVC.year = dateComps.year;
+        yearVC.dataController = self.dataController;
+        
+        [self.navigationController pushViewController:yearVC animated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void)hd_handleSettingsButton:(id)sender {
+    HDSettingsViewController *vc = [[HDSettingsViewController alloc] init];
+    vc.notificationController = self.notificationController;
+    vc.delegate = self;
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nc animated:YES completion:nil];
+}
+
+- (bool)hd_isHomeView {
+    return self == self.navigationController.viewControllers.firstObject;
+}
+
+#pragma mark - HDDismissableViewControllerDelegate methods
+
+- (void)viewControllerShouldDismiss:(UIViewController *)viewController wasCancelled:(bool)wasCancelled {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
