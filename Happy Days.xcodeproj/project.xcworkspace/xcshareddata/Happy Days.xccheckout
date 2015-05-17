@@ -10,29 +10,29 @@
 	<string>Happy Days</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3D3B00CB-0943-4541-9F29-70358503C488</key>
-		<string>ssh://github.com/simonwhitaker/happy-days.git</string>
+		<key>A77812463541B9FFEDD33F9B6B7DF2D670F1FCCE</key>
+		<string>github.com:simonwhitaker/happy-days.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Happy Days.xcodeproj/project.xcworkspace</string>
+	<string>Happy Days.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3D3B00CB-0943-4541-9F29-70358503C488</key>
+		<key>A77812463541B9FFEDD33F9B6B7DF2D670F1FCCE</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/simonwhitaker/happy-days.git</string>
+	<string>github.com:simonwhitaker/happy-days.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3D3B00CB-0943-4541-9F29-70358503C488</string>
+	<string>A77812463541B9FFEDD33F9B6B7DF2D670F1FCCE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3D3B00CB-0943-4541-9F29-70358503C488</string>
+			<string>A77812463541B9FFEDD33F9B6B7DF2D670F1FCCE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>happy-days</string>
 		</dict>
