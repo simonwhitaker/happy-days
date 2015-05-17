@@ -72,6 +72,7 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
     HDCalendarDayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarDayViewIdentifier forIndexPath:indexPath];
     cell.backgroundColor = self.collectionView.backgroundColor;
     cell.dayNumberLabel.backgroundColor = cell.backgroundColor;
+    cell.dayNumberLabel.text = nil;
     
     NSInteger day = indexPath.item - [self hd_numberOfSpacerCellsForSection:indexPath.section] + 1;
     
