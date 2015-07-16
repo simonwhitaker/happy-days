@@ -131,12 +131,7 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == HDSettingsSectionReminder) {
-        if (indexPath.row == HDSettingsReminderRowOnSwitch) {
-            self.notificationController.localNotificationEnabled = !self.notificationController.isLocalNotificationEnabled;
-            [self.reminderSwitch setOn:self.notificationController.isLocalNotificationEnabled animated:YES];
-            [self hd_reloadReminderSection];
-        }
-        else if (indexPath.row == HDSettingsReminderRowTime) {
+        if (indexPath.row == HDSettingsReminderRowTime) {
             self.showTimePicker = !self.showTimePicker;
             NSIndexPath *ip = [NSIndexPath indexPathForRow:HDSettingsReminderRowTimePicker inSection:HDSettingsSectionReminder];
             if (self.showTimePicker) {
@@ -156,11 +151,6 @@ typedef NS_ENUM(NSInteger, HDSettingsReminderRow) {
 
 - (void)hd_handleReminderSwitch:(UISwitch*)reminderSwitch {
     self.notificationController.localNotificationEnabled = reminderSwitch.isOn;
-    [self hd_reloadReminderSection];
-}
-
-- (void)hd_reloadReminderSection {
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:HDSettingsSectionReminder] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)hd_handleDatePickerValueChanged:(UIDatePicker*)datePicker {
