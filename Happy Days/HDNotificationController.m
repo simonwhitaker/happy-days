@@ -21,7 +21,7 @@ static NSString *const kUserDefaultsKeyLocalNotificationsTimeMinutes = @"org.net
     self = [super init];
     if (self) {
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{
-            kUserDefaultsKeyLocalNotificationsEnabled: @(true),
+            kUserDefaultsKeyLocalNotificationsEnabled: @(false),
             kUserDefaultsKeyLocalNotificationsTimeMinutes: @(21*60),
         }];
         _localNotificationEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsKeyLocalNotificationsEnabled];
@@ -37,6 +37,9 @@ static NSString *const kUserDefaultsKeyLocalNotificationsTimeMinutes = @"org.net
         [[NSUserDefaults standardUserDefaults] setBool:_localNotificationEnabled forKey:kUserDefaultsKeyLocalNotificationsEnabled];
         
         if (_localNotificationEnabled) {
+            UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
             [self hd_scheduleLocalNotificationWithCurrentSettings];
         }
         else {
