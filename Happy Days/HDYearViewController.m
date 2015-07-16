@@ -68,6 +68,10 @@ static NSString *const kCalendarMonthHeaderIdentifier = @"CalendarMonthHeaderIde
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self.collectionView scrollToItemAtIndexPath:[self hd_indexPathForDate:[NSDate date]] atScrollPosition:UICollectionViewScrollPositionCenteredVertically animated:NO];
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HDCalendarDayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCalendarDayViewIdentifier forIndexPath:indexPath];
     cell.backgroundColor = self.collectionView.backgroundColor;
